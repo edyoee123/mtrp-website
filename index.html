@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>069 Jefferson Salbahe Street</title>
+  <title>Manila Town Roleplay</title>
   <style>
     * {
       margin: 0;
@@ -11,22 +11,21 @@
       box-sizing: border-box;
     }
     body {
-      font-family: 'Courier New', monospace;
+      font-family: 'Segoe UI', sans-serif;
       background-color: #0d0d0d;
       color: white;
       text-align: center;
       padding: 40px 20px;
     }
     h1 {
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: #ff2c2c;
-      text-shadow: 2px 2px #000;
-      animation: pulse 2s infinite;
+      margin-bottom: 10px;
     }
     h2 {
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       color: #ffffff;
-      margin-top: 20px;
+      margin-top: 30px;
     }
     .ip-box {
       background-color: #1e1e1e;
@@ -34,47 +33,115 @@
       padding: 20px;
       border: 2px solid #ff2c2c;
       border-radius: 10px;
-      margin-top: 30px;
-      font-size: 1.2rem;
+      margin-top: 20px;
+      font-size: 1.1rem;
       letter-spacing: 1px;
     }
-    .tagline {
-      font-style: italic;
-      color: #999;
-      margin-top: 10px;
+    .form-section {
+      margin-top: 40px;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      padding: 12px 25px;
+      background-color: #ff2c2c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #cc1f1f;
     }
     .footer {
-      margin-top: 50px;
-      font-size: 0.9rem;
-      color: #555;
+      margin-top: 60px;
+      font-size: 0.85rem;
+      color: #777;
+    }
+    .thread {
+      background-color: #2a2a2a;
+      padding: 15px;
+      margin-top: 15px;
+      border-radius: 6px;
     }
   </style>
+  <script>
+    function registerUser() {
+      const username = document.getElementById('reg-username').value;
+      const email = document.getElementById('reg-email').value;
+      const password = document.getElementById('reg-password').value;
+      if (username && email && password) {
+        localStorage.setItem('mtrpUser', JSON.stringify({ username, email, password }));
+        alert("Registration successful!");
+      } else {
+        alert("Please fill in all registration fields.");
+      }
+    }
+
+    function postThread() {
+      const user = JSON.parse(localStorage.getItem('mtrpUser'));
+      if (!user) {
+        alert("You need to register first before posting a thread.");
+        return;
+      }
+      const title = document.getElementById('thread-title').value;
+      const content = document.getElementById('thread-content').value;
+      if (title && content) {
+        const threadContainer = document.getElementById('thread-container');
+        const threadDiv = document.createElement('div');
+        threadDiv.classList.add('thread');
+        threadDiv.innerHTML = `<h3>${title}</h3><p>${content}</p><small>Posted by: ${user.username}</small>`;
+        threadContainer.prepend(threadDiv);
+        document.getElementById('thread-title').value = '';
+        document.getElementById('thread-content').value = '';
+      } else {
+        alert("Please enter both title and content.");
+      }
+    }
+  </script>
 </head>
 <body>
-  <h1>069 Jefferson Salbahe Street</h1>
-  <p class="tagline">Manila Town Roleplay OGs 🔫</p>
+  <h1>Manila Town Roleplay</h1>
+  <p>Your Classic Filipino SAMP Experience 🇵🇭</p>
 
-  <h2>Join Our Server</h2>
+  <h2>Server Information</h2>
   <div class="ip-box">
     <p>📡 IP: 104.234.180.232:7777</p>
     <p>🌐 play.manilatownrp.fun:7777</p>
   </div>
 
-  <h2>Gang Rules</h2>
-  <ul style="list-style: none; margin-top: 20px;">
-    <li>✔ Respect the turf</li>
-    <li>✔ No snitchin'</li>
-    <li>✔ Rep 069 every day</li>
-  </ul>
+  <div class="form-section">
+    <h2>Register to Create Threads</h2>
+    <input id="reg-username" type="text" placeholder="Username" required>
+    <input id="reg-email" type="email" placeholder="Email Address" required>
+    <input id="reg-password" type="password" placeholder="Password" required>
+    <button onclick="registerUser()">Register</button>
+  </div>
+
+  <div class="form-section">
+    <h2>Create a Thread</h2>
+    <input id="thread-title" type="text" placeholder="Thread Title" required>
+    <textarea id="thread-content" rows="5" placeholder="Thread Content" required></textarea>
+    <button onclick="postThread()">Post Thread</button>
+    <div id="thread-container"></div>
+  </div>
 
   <div class="footer">
-    &copy; 2025 069 Jefferson Salbahe Street | Gangsta Made
+    &copy; 2025 Manila Town RP | All rights reserved.
   </div>
 </body>
 </html>
-0
